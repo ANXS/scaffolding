@@ -1,0 +1,13 @@
+FROM ubuntu:focal
+
+LABEL maintainer="ANXS Crew"
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        python3-pip rustc sudo python3-setuptools docker.io
+
+RUN pip3 install -U pip && \
+    pip3 install ansible molecule-docker
+
+COPY scripts/entrypoint.sh /usr/local/bin/entrypoint
+CMD ["/usr/local/bin/entrypoint"]
